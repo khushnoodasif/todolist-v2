@@ -2,7 +2,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const _ = require("lodash");
-const timeout = require("connect-timeout")
+const dotenv = require('dotenv')
+dotenv.config()
 
 const app = express();
 
@@ -16,9 +17,7 @@ app.use(bodyParser.urlencoded({
 
 app.use(express.static("public"));
 
-app.use(timeout('5s'));
-
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/todolistDB", {
+mongoose.connect("mongodb+srv://admin-kush:" + process.env.PS + "@cluster0.co78d.mongodb.net/todolistDB", {
   useNewUrlParser: true
 });
 
@@ -132,6 +131,6 @@ app.post("/delete", function (req, res) {
   }
 });
 
-app.listen(process.env.PORT || 3000, function () {
-  console.log("Server started on port 3000");
+app.listen(process.env.PORT || 4000, function () {
+  console.log("Server started on port 4000");
 });
