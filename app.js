@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const _ = require("lodash");
+const timeout = require("connect-timeout")
 
 const app = express();
 
@@ -14,6 +15,8 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use(express.static("public"));
+
+app.use(timeout('5s'));
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/todolistDB", {
   useNewUrlParser: true
